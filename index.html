@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Happy Birthday 🎂</title>
+
+<style>
+:root {
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+}
+
+/* RESET */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  overflow: hidden;
+  -webkit-text-size-adjust: 100%;
+  background: black;
+}
+
+/* SLIDE */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  padding:
+    calc(20px + var(--safe-top))
+    20px
+    calc(20px + var(--safe-bottom));
+  box-sizing: border-box;
+  opacity: 0;
+  transition: opacity 1s ease;
+  color: white;
+}
+
+.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+/* BACKGROUND */
+.slide1 { background: linear-gradient(#ff9a9e,#fad0c4); }
+.slide2 { background: linear-gradient(#a18cd1,#fbc2eb); }
+.slide3 { background: linear-gradient(#89f7fe,#66a6ff); }
+.slide4 { background: linear-gradient(#fddb92,#d1fdff); color:black; }
+.slide5 { background: linear-gradient(#cfd9df,#e2ebf0); color:black; }
+.slide6 { background: linear-gradient(#fbc2eb,#a6c1ee); }
+.slide7 { background: linear-gradient(#e0c3fc,#8ec5fc); }
+.slide8 { background: linear-gradient(#f093fb,#f5576c); }
+
+/* TEXT RESPONSIVE */
+h1 {
+  font-size: clamp(26px, 8vw, 44px);
+  margin-bottom: 12px;
+}
+
+p {
+  font-size: clamp(15px, 4.5vw, 20px);
+  max-width: 420px;
+  line-height: 1.6;
+}
+
+/* BUTTON */
+button {
+  position: fixed;
+  right: 16px;
+  bottom: calc(20px + var(--safe-bottom));
+  padding: 10px 18px;
+  border-radius: 20px;
+  border: none;
+  background: black;
+  color: white;
+  font-size: 14px;
+}
+
+/* ANIMATION */
+.fade {
+  animation: fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 MUSIC -->
+<audio id="bgm" loop>
+  <source src="hbd.mp3" type="audio/mpeg">
+</audio>
+
+<!-- SLIDES -->
+<div class="slide slide1 active">
+  <h1 class="fade">Happy Birthday 🎉</h1>
+  <p class="fade">Sabila Aprilia</p>
+</div>
+
+<div class="slide slide2">
+  <h1 class="fade">A Little Note 💌</h1>
+  <p class="fade">Hari ini bukan cuma tentang bertambahnya usia, tapi tentang semua perjalanan yang sudah kamu lewati</p>
+</div>
+
+<div class="slide slide3">
+  <h1 class="fade">Your Presence 🎤</h1>
+  <p class="fade">Cara kamu membawa energi di setiap event selalu terasa berbeda, selalu hidup</p>
+</div>
+
+<div class="slide slide4">
+  <h1 class="fade">Impact ✨</h1>
+  <p class="fade">Tanpa disadari, kamu sudah menginspirasi banyak orang, termasuk aku</p>
+</div>
+
+<div class="slide slide5">
+  <h1 class="fade">Wish 🌙</h1>
+  <p class="fade">Semoga semua hal baik terus mengikuti langkah kamu, dan setiap usaha kamu selalu menemukan jalannya</p>
+</div>
+
+<div class="slide slide6">
+  <h1 class="fade">Keep Shining 💖</h1>
+  <p class="fade">Terima kasih sudah menjadi versi dirimu yang sekarang, dan semoga tetap bersinar ke depannya</p>
+</div>
+
+<div class="slide slide7">
+  <h1 class="fade">A Small Apology 🌷</h1>
+  <p class="fade">Maaf cuma bisa ngasih seperti ini, mungkin masih banyak kata yang kurang, tapi aku cuma pengen ngasih sesuatu yang berkesan</p>
+</div>
+
+<div class="slide slide8">
+  <h1 class="fade">Once Again 🎂</h1>
+  <p class="fade">Sekali lagi, happy birthday kak Sabilaaaa!!!! 💕</p>
+</div>
+
+<button onclick="nextSlide()">Next ➜</button>
+
+<script>
+let current = 0;
+const slides = document.querySelectorAll('.slide');
+const music = document.getElementById("bgm");
+
+/* PLAY MUSIC AFTER USER INTERACTION */
+document.body.addEventListener("click", () => {
+  music.play().catch(()=>{});
+}, { once: true });
+
+function nextSlide() {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}
+
+/* AUTO SLIDE (SLOWER, COMFORTABLE) */
+setInterval(() => {
+  nextSlide();
+}, 7000);
+</script>
+
+</body>
+</html>
